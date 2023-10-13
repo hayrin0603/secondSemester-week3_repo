@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+{% if user.is_active %}
+  <h2>{{ user.username }}님의 관심목록</h2>
+  {% for item in wishlists %} <!--wishlist 변수에 저장된 찜 목록들을 순회-->
+    <a href="{% url 'detail' item.post.id %}" >{{ item.post.title }}</a>
+ <!--해당 게시물의 id 값을 받아와, 각 게시글의 상세페이지(url)를 게시글 제목에 연결-->
+
+
+ 
+ <!-- 삭제 버튼 과제 -->
+ <a href="{% url 'remove_from_wishlist' item.post.id %}" > 삭제 </a>
+    <hr>
+  {% empty %}
+    <p>관심목록이 비어있습니다</p>
+  {% endfor %}
+{% else %}
+  <h1>로그인하면 볼 수 있는 페이지입니다.</h1>
+{% endif %}
+
+{% endblock %}

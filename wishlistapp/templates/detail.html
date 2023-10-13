@@ -9,4 +9,22 @@
     <hr>
     <h3>{{ blog.title }}</h3>
     <p>{{ blog.body }}</p>
+
+
+{% if user.is_authenticated %} <!--로그인 했을 때만 찜 버튼 생성-->
+    {% if not already_in_wishlist %}
+        <form method="post" action=" {% url 'add_to_wishlist' blog.id %}"> <!--해당 게시물 id를 받아서 -->
+        {% csrf_token %}<!--데이터 안전하게 전송하기-->
+        <button type="submit">찜하기</button>
+        </form>
+    {% else %}
+        <form method="post" action="{% url 'remove_from_wishlist' blog.id %}">
+        {% csrf_token %}
+        <button type="submit">찜취소</button>
+        </form>
+    {% endif %}
+{% else %}
+        <p><a href="{% url 'login' %}">log in</a></p>
+{% endif %}
 {% endblock %}
+

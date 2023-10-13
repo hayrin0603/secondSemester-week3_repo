@@ -12,8 +12,10 @@
         <a href="{% url 'new' %}">글 작성</a>
         <a href="{% url 'read' %}">글 목록</a>
 
-        {% if user.is_active %}
+        {% if user.is_active %} <!--로그인 했을 때만 보일 수 있게-->
             {{ user.username }}님 안녕하세요 <a href="{% url 'logout' %}">로그아웃</a>
+            <a href="{% url 'wishlist' %}">찜 목록</a>
+            <a href="{% url 'write' %}">작성글</a>
         {% else %}
             <a href="{% url 'signup' %}">회원가입</a>
             <a href="{% url 'login' %}">로그인</a>
